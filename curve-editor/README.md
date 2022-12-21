@@ -1,4 +1,4 @@
-# CPSC 453 Assignment 3
+# Curve Editor
 
 ## Controls
 
