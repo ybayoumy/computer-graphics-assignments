@@ -93,7 +93,7 @@ add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD=ON)
 
 # Compile our main application
 file(GLOB SOURCES
-    curve-editor/*
+    src/*
     #thirdparty/glew-2.1.0/src/glew.c
 	thirdparty/imgui-1.78/imgui/*.cpp
 )
@@ -103,7 +103,7 @@ set(APP_NAME "curve-editor")
 
 
 # Copy all the shaders and tell the build system to re-run CMAKE if one of them changes
-file(GLOB files curve-editor/shaders/*)
+file(GLOB files src/shaders/*)
 foreach(file ${files})
 	get_filename_component(name ${file} NAME)
 	configure_file(${file} shaders/${name})

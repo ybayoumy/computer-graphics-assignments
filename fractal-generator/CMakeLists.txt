@@ -53,10 +53,10 @@ set(LIBRARIES ${LIBRARIES} ${OPENGL_gl_LIBRARY})
 
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-	list(APPEND _453_CMAKE_CXX_FLAGS ${_453_CMAKE_CXX_FLAGS} "-Wall" "-pedantic")
+	list(APPEND _CMAKE_CXX_FLAGS ${_CMAKE_CXX_FLAGS} "-Wall" "-pedantic")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	# using GCC
-	list(APPEND _453_CMAKE_CXX_FLAGS ${_453_CMAKE_CXX_FLAGS} "-fdiagnostics-color=always" "-Wall" "-pedantic" "-Wconversion")
+	list(APPEND _CMAKE_CXX_FLAGS ${_CMAKE_CXX_FLAGS} "-fdiagnostics-color=always" "-Wall" "-pedantic" "-Wconversion")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
 	# using Intel C++
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
@@ -69,7 +69,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	 # Turn those off: https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/c5105?view=vs-2019
 	add_compile_options("/wd5105")
 
-	set(_453_CMAKE_CXX_FLAGS ${_453_CMAKE_CXX_FLAGS} /W3)
+	set(_CMAKE_CXX_FLAGS ${_CMAKE_CXX_FLAGS} /W3)
 
 endif()
 
@@ -87,7 +87,7 @@ endif()
 
 # Compile our main application
 file(GLOB SOURCES
-    fractal-generator/*
+    src/*
     thirdparty/glew-2.1.0/src/glew.c
 )
 set(INCLUDES ${INCLUDES} src)
@@ -96,7 +96,7 @@ set(APP_NAME "fractal-generator")
 
 
 # Copy all the shaders and tell the build system to re-run CMAKE if one of them changes
-file(GLOB files fractal-generator/shaders/*)
+file(GLOB files src/shaders/*)
 foreach(file ${files})
 	get_filename_component(name ${file} NAME)
 	configure_file(${file} shaders/${name})
@@ -106,5 +106,5 @@ add_executable(${APP_NAME} ${SOURCES})
 target_include_directories(${APP_NAME} PRIVATE ${INCLUDES})
 target_link_libraries(${APP_NAME} ${LIBRARIES})
 target_compile_definitions(${APP_NAME} PRIVATE ${DEFINITIONS})
-target_compile_options(${APP_NAME} PRIVATE ${_453_CMAKE_CXX_FLAGS})
+target_compile_options(${APP_NAME} PRIVATE ${_CMAKE_CXX_FLAGS})
 set_target_properties(${APP_NAME} PROPERTIES INSTALL_RPATH "./" BUILD_RPATH "./")

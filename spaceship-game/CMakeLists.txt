@@ -90,7 +90,7 @@ include_directories(SYSTEM thirdparty/imgui thirdparty/imgui/examples)
 
 # Compile our main application
 file(GLOB SOURCES
-    spaceship-game/*
+    src/*
 	thirdparty/imgui-1.78/imgui/*.cpp
 )
 set(INCLUDES ${INCLUDES} src)
@@ -99,7 +99,7 @@ set(APP_NAME "spaceship-game")
 
 
 # Copy all the shaders and tell the build system to re-run CMAKE if one of them changes
-file(GLOB files spaceship-game/shaders/*)
+file(GLOB files src/shaders/*)
 foreach(file ${files})
 	get_filename_component(name ${file} NAME)
 	configure_file(${file} shaders/${name})
