@@ -1,2 +1,4 @@
 */*/*.vcxproj
 */*/*.vcxproj.filters
+*/.vs
+*/out
