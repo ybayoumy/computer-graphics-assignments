@@ -24,7 +24,6 @@
 CPU_Geometry squareGeom()
 {
 	CPU_Geometry retGeom;
-	// vertices
 	retGeom.verts.push_back(glm::vec3(-1.f, 1.f, 0.f));
 	retGeom.verts.push_back(glm::vec3(-1.f, -1.f, 0.f));
 	retGeom.verts.push_back(glm::vec3(1.f, -1.f, 0.f));
@@ -32,7 +31,6 @@ CPU_Geometry squareGeom()
 	retGeom.verts.push_back(glm::vec3(1.f, -1.f, 0.f));
 	retGeom.verts.push_back(glm::vec3(1.f, 1.f, 0.f));
 
-	// texture coordinates
 	retGeom.texCoords.push_back(glm::vec2(0.f, 1.f));
 	retGeom.texCoords.push_back(glm::vec2(0.f, 0.f));
 	retGeom.texCoords.push_back(glm::vec2(1.f, 0.f));
@@ -44,16 +42,16 @@ CPU_Geometry squareGeom()
 
 struct GameObject
 {
-	GameObject(std::string texturePath, GLenum textureInterpolation) : texture(texturePath, textureInterpolation),
-																	   children(),
-																	   position(0.0f, 0.0f, 0.0f),
-																	   theta(0),
-																	   scale(1),
-																	   translationMatrix(1.f),
-																	   rotationMatrix(1.f),
-																	   scaleMatrix(1.f)
-	{
-	}
+	GameObject(std::string texturePath, GLenum textureInterpolation) 
+		:	texture(texturePath, textureInterpolation)
+		,	children()
+		,	position(0.0f, 0.0f, 0.0f)
+		,	theta(0)
+		,	scale(1)
+		,	translationMatrix(1.f)
+		,	rotationMatrix(1.f)
+		,	scaleMatrix(1.f)
+	{}
 
 	Texture texture;
 	std::vector<GameObject *> children;
@@ -112,18 +110,18 @@ struct GameObject
 	}
 };
 
-class MyCallbacks : public CallbackInterface
+class ShipCallbacks : public CallbackInterface
 {
 
 public:
-	MyCallbacks(ShaderProgram &shader, int screenWidth, int screenHeight) : shader(shader),
-																			wPressed(false),
-																			sPressed(false),
-																			restart(false),
-																			mousePosition(),
-																			screenDim(screenWidth, screenHeight)
-	{
-	}
+	ShipCallbacks(ShaderProgram &shader, int screenWidth, int screenHeight)
+		:	shader(shader)
+		,	wPressed(false)
+		,	sPressed(false)
+		,	restart(false)
+		,	mousePosition()
+		,	screenDim(screenWidth, screenHeight)
+	{}
 
 	virtual void keyCallback(int key, int scancode, int action, int mods)
 	{
@@ -293,7 +291,7 @@ void drawShip(GameObject &ship, GLuint uniformLocation)
 	}
 }
 
-std::vector<GameObject *> genPointervector(std::vector<GameObject> &v)
+std::vector<GameObject *> genPointerVector(std::vector<GameObject> &v)
 {
 	std::vector<GameObject *> res;
 	for (int i = 0; i < v.size(); i++)
@@ -317,7 +315,7 @@ int main()
 	ShaderProgram shader("shaders/test.vert", "shaders/test.frag");
 
 	// CALLBACKS
-	std::shared_ptr<MyCallbacks> inputManager = std::make_shared<MyCallbacks>(shader, 800, 800);
+	std::shared_ptr<ShipCallbacks> inputManager = std::make_shared<ShipCallbacks>(shader, 800, 800);
 	window.setCallbacks(inputManager);
 
 	CPU_Geometry square_cgeom = squareGeom();
@@ -328,7 +326,7 @@ int main()
 	GameObject ship = setupShip();
 	std::vector<GameObject> fireballs = setupFireballs();
 	std::vector<GameObject> diamonds = setupDiamonds(fireballs);
-	std::vector<GameObject *> activeDiamonds = genPointervector(diamonds);
+	std::vector<GameObject *> activeDiamonds = genPointerVector(diamonds);
 
 	shader.use();
 	square_ggeom.bind();
@@ -347,7 +345,7 @@ int main()
 			ship = setupShip();
 			fireballs = setupFireballs();
 			diamonds = setupDiamonds(fireballs);
-			activeDiamonds = genPointervector(diamonds);
+			activeDiamonds = genPointerVector(diamonds);
 			score = 0;
 			gameLost = false;
 		}

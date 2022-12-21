@@ -107,28 +107,27 @@ struct Camera
 	}
 };
 
-// EXAMPLE CALLBACKS
-class A3Callbacks : public CallbackInterface
+class CurveCallbacks : public CallbackInterface
 {
 
 public:
-	A3Callbacks(int screenWidth, int screenHeight) : clearPoints(false),
-													 bPressed(false),
-													 nPressed(false),
-													 tPressed(false),
-													 onePressed(false),
-													 twoPressed(false),
-													 threePressed(false),
-													 fourPressed(false),
-													 wPressed(false),
-													 aPressed(false),
-													 sPressed(false),
-													 dPressed(false),
-													 lastMouseAction(noAction),
-													 mousePosition(),
-													 screenDim(screenWidth, screenHeight)
-	{
-	}
+	CurveCallbacks(int screenWidth, int screenHeight) 
+		:	clearPoints(false)
+		,	bPressed(false)
+		,	nPressed(false)
+		,	tPressed(false)
+		,	onePressed(false)
+		,	twoPressed(false)
+		,	threePressed(false)
+		,	fourPressed(false)
+		,	wPressed(false)
+		,	aPressed(false)
+		,	sPressed(false)
+		,	dPressed(false)
+		,	lastMouseAction(noAction)
+		,	mousePosition()
+		,	screenDim(screenWidth, screenHeight)
+	{}
 
 	virtual void keyCallback(int key, int scancode, int action, int mods)
 	{
@@ -595,12 +594,12 @@ int main()
 
 	// WINDOW
 	glfwInit();
-	Window window(screenRes, screenRes, "Curve Editor"); // can set callbacks at construction if desired
+	Window window(screenRes, screenRes, "Curve Editor");
 
 	GLDebug::enable();
 
 	// CALLBACKS
-	auto callbacks = std::make_shared<A3Callbacks>(screenRes, screenRes);
+	auto callbacks = std::make_shared<CurveCallbacks>(screenRes, screenRes);
 	window.setCallbacks(callbacks);
 
 	ShaderProgram shader("shaders/test.vert", "shaders/test.frag");

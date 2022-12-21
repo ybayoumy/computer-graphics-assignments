@@ -31,9 +31,17 @@ class Callbacks : public CallbackInterface
 
 public:
 	Callbacks()
-		: camera(glm::radians(0.0f), glm::radians(0.0f), 10.0), aspect(1.0f), rightMouseDown(false), mouseOldX(0.0), mouseOldY(0.0), pause(false), restart(false), playbackSpeed(1.0f), focusedBody(0)
-	{
-	}
+		:	camera(glm::radians(0.0f)
+		,	glm::radians(0.0f), 10.0)
+		,	aspect(1.0f)
+		,	rightMouseDown(false)
+		,	mouseOldX(0.0)
+		,	mouseOldY(0.0)
+		,	pause(false)
+		,	restart(false)
+		,	playbackSpeed(1.0f)
+		,	focusedBody(0)
+	{}
 
 	virtual void keyCallback(int key, int scancode, int action, int mods)
 	{
