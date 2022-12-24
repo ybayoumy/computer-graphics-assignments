@@ -265,6 +265,17 @@ Scene initScene1() {
 	sphere1->material.specularCoefficient = 64;
 	scene1.shapesInScene.push_back(sphere1);
 
+	//Reflective blue cylinder
+	std::shared_ptr<Cylinder> cylinder1 = std::make_shared<Cylinder>(
+		vec3(1.9f, 0.0f, -9.0f), 0.825, 8
+		);
+	cylinder1->height = 2.0f;
+	cylinder1->material.diffuse = vec3(0.0, 0.0, 0.8);
+	cylinder1->material.specular = 1.0f * cylinder1->material.diffuse;
+	cylinder1->material.reflectionStrength = vec3(0.3);
+	cylinder1->material.specularCoefficient = 64;
+	scene1.shapesInScene.push_back(cylinder1);
+
 	//pyramid
 	std::shared_ptr<Triangles> pyramid = std::make_shared<Triangles>();
 	pyramid->initTriangles(4, blue_pyramid, 2);
@@ -328,6 +339,17 @@ Scene initScene2() {
 	sphere2->material.specular = sphere2->material.diffuse;
 	sphere2->material.specularCoefficient = 64;
 	scene2.shapesInScene.push_back(sphere2);
+
+	//Reflective blue cylinder
+	std::shared_ptr<Cylinder> cylinder1 = std::make_shared<Cylinder>(
+		vec3(1.9f, 0.0f, -9.0f), 0.825, 8
+		);
+	cylinder1->height = 2.0f;
+	cylinder1->material.diffuse = vec3(0.0, 0.0, 0.8);
+	cylinder1->material.specular = 1.0f * cylinder1->material.diffuse;
+	cylinder1->material.reflectionStrength = vec3(0.3);
+	cylinder1->material.specularCoefficient = 64;
+	scene2.shapesInScene.push_back(cylinder1);
 
 	// Reflective grey sphere
 	std::shared_ptr<Sphere> sphere3 = std::make_shared<Sphere>(

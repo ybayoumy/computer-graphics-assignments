@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include <glm/common.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -14,40 +15,38 @@ Sphere::Sphere(vec3 c, float r, int ID){
 	id = ID;
 }
 
-//------------------------------------------------------------------------------
-// This is part 2.1 of your assignment. At the moment, the spheres are not showing
-// up. Implement this method to make them show up.
-//
-// Make sure you set all of the appropriate fields in the Intersection object.
-//------------------------------------------------------------------------------
 Intersection Sphere::getIntersection(Ray ray){
 	Intersection i{};
 	i.id = id;
 	i.material = material;
 
-	// You are required to implement this intersection.
-	//
-	// NOTE: You _must_ set these values appropriately for each case:
-	//
-	// No Intersection:
-	// i.numberOfIntersections = 0;
-	//
-	// Intersection:
-	// i.normal = **the normal at the point of intersection **
-	// i.point = **the point of intersection**
-	// i.numberOfIntersections = 1; // for a single intersection
-	//
-	// If you get fancy and implement things like refraction, you may actually
-	// want to track more than one intersection. You'll need to change
-	// The intersection struct in that case.
+	vec3 D = ray.origin - this->centre;
+	float determinant = (pow(dot(ray.direction, D), 2.0f) - pow(length(D), 2.0f) + pow(this->radius, 2.0f));
+
+	if (determinant < 0) {
+		return i;
+	}
+
+	float t;
+	float t1 = -dot(ray.direction, D) - sqrt(determinant);
+	float t2 = -dot(ray.direction, D) + sqrt(determinant);
+
+	if (t1 < 0 && t2 < 0)
+		return i;
+	else if (t1 < 0)
+		t = t2;
+	else if (t2 < 0)
+		t = t1;
+	else
+		t = std::min(t1, t2);
+
+	i.numberOfIntersections = 1;
+	i.point = ray.origin + t * ray.direction;
+	i.normal = normalize(i.point - this->centre);
+
 	return i;
 }
 
-//------------------------------------------------------------------------------
-// This is part 2.2 of your assignment. At the moment, the cylinders are not showing
-// up. Implement this method to make them show up.
-//
-// Make sure you set all of the appropriate fields in the Intersection object.
 //------------------------------------------------------------------------------
 Cylinder::Cylinder(vec3 c, float r, int ID)
 {
@@ -62,22 +61,42 @@ Intersection Cylinder::getIntersection(Ray ray)
 	i.id = id;
 	i.material = material;
 
+	float a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+	float b = 2.0f * ((ray.origin.x - center.x) * ray.direction.x + (ray.origin.z - center.z) * ray.direction.z);
+	float c = pow(ray.origin.x - center.x, 2.0f) + pow(ray.origin.z - center.z, 2.0f) - radius * radius;
 
-	// You are required to implement this intersection.
-	//
-	// NOTE: You _must_ set these values appropriately for each case:
-	//
-	// No Intersection:
-	// i.numberOfIntersections = 0;
-	//
-	// Intersection:
-	// i.normal = **the normal at the point of intersection **
-	// i.point = **the point of intersection**
-	// i.numberOfIntersections = 1; // for a single intersection
-	//
-	// If you get fancy and implement things like refraction, you may actually
-	// want to track more than one intersection. You'll need to change
-	// The intersection struct in that case.
+	float determinant = pow(b, 2) - 4.0f * a * c;
+
+	if (determinant < 0) {
+		return i;
+	}
+
+	float t;
+	float t1 = (- b - sqrt(determinant)) / (2.0f * a);
+	float t2 = (-b + sqrt(determinant)) / (2.0f * a);
+
+	if (t1 < 0 && t2 < 0)
+		return i;
+	else if (t1 <= 0)
+		t = t2;
+	else if (t2 <= 0)
+		t = t1;
+	else
+		t = std::min(t1, t2);
+
+	i.numberOfIntersections = 1;
+	i.point = ray.origin + t * ray.direction;
+
+	vec3 n = i.point - this->center;
+	n.y = 0.0f;
+	i.normal = normalize(n);
+
+	// limiting height of the cylinder
+	if (i.point.y < -height || i.point.y > height) {
+		i.numberOfIntersections = 0;
+		return i;
+	}
+
 	return i;
 }
 
