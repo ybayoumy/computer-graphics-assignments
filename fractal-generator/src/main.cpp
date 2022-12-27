@@ -13,7 +13,7 @@
 #include <vector>
 #include <cmath>
 
-#define MAX_ITERATIONS 8
+#define MAX_ITERATIONS 20
 
 struct FractalParams {
 	int scene;

@@ -21,7 +21,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #define PI 3.14159f
-#define MOUSE_SENSITIVITY 10.0f
+#define MOUSE_SENSITIVITY 50.0f
 #define MOVE_SPEED 0.05f
 
 void updateGPUGeometry(GPU_Geometry &gpuGeom, CPU_Geometry const &cpuGeom)
@@ -82,6 +82,11 @@ struct Camera
 		position += rightDirection * speed;
 	}
 
+	void moveVertical(float speed)
+	{
+		position += upDirection * speed;
+	}
+
 	void moveForward(float speed)
 	{
 		position += lookDirection * speed;
@@ -124,6 +129,8 @@ public:
 		,	aPressed(false)
 		,	sPressed(false)
 		,	dPressed(false)
+		,	spacePressed(false)
+		,	ctrlPressed(false)
 		,	lastMouseAction(noAction)
 		,	mousePosition()
 		,	screenDim(screenWidth, screenHeight)
@@ -181,6 +188,14 @@ public:
 		{
 			dPressed = true;
 		}
+		else if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+		{
+			spacePressed = true;
+		}
+		else if (key == GLFW_KEY_LEFT_CONTROL && action == GLFW_PRESS)
+		{
+			ctrlPressed = true;
+		}
 		else if (key == GLFW_KEY_W && action == GLFW_RELEASE)
 		{
 			wPressed = false;
@@ -196,6 +211,14 @@ public:
 		else if (key == GLFW_KEY_D && action == GLFW_RELEASE)
 		{
 			dPressed = false;
+		}
+		else if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
+		{
+			spacePressed = false;
+		}
+		else if (key == GLFW_KEY_LEFT_CONTROL && action == GLFW_RELEASE)
+		{
+			ctrlPressed = false;
 		}
 	}
 
@@ -312,6 +335,14 @@ public:
 		{
 			res = dPressed;
 		}
+		else if (button == GLFW_KEY_SPACE)
+		{
+			res = spacePressed;
+		}
+		else if (button == GLFW_KEY_LEFT_CONTROL)
+		{
+			res = ctrlPressed;
+		}
 		else
 		{
 			res = false;
@@ -332,6 +363,8 @@ private:
 	bool aPressed;
 	bool sPressed;
 	bool dPressed;
+	bool spacePressed;
+	bool ctrlPressed;
 	MouseAction lastMouseAction;
 	glm::vec2 mousePosition;
 	glm::vec2 screenDim;
@@ -843,6 +876,10 @@ int main()
 				cm.moveForward(-MOVE_SPEED);
 			if (callbacks->isKeyPressed(GLFW_KEY_D))
 				cm.moveHorizontal(MOVE_SPEED);
+			if (callbacks->isKeyPressed(GLFW_KEY_SPACE))
+				cm.moveVertical(MOVE_SPEED);
+			if (callbacks->isKeyPressed(GLFW_KEY_LEFT_CONTROL))
+				cm.moveVertical(-MOVE_SPEED);
 
 			glm::vec2 mouseDiff = mousePos - prevMousePos;
 			cm.rotateCamera(mouseDiff.x, mouseDiff.y);

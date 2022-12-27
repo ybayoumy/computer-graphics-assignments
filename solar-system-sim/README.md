@@ -1,5 +1,16 @@
 # Solar System Simulation
 
+This is a solar system simulation of the orbits of the earth and moon. Some values were exaggerated for visibility purposes. The Phong Reflection Model was used to light up the celestial bodies in the scene.
+
+## Sun View
+![Sun View](../media/sun.gif)
+
+## Earth View
+![Earth View](../media/earth.gif)
+
+## Moon View
+![Moon View](../media/moon.gif)
+
 ## Controls
 
 Look around the scene by holding right click and moving your mouse. You can zoom the camera in/out by scrolling.
@@ -14,12 +25,3 @@ Press the following keys to focus on the different celestial bodies in the scene
 - `1`: Focus on the Sun
 - `2`: Focus on the Earth
 - `3`: Focus on the Moon
-
-
-## Platform and Compiler
-
-Visual Studio 2022 was used to compile and run the source code
-
-Platform (OS): Windows 10 Pro
-
-Compiler: C++17

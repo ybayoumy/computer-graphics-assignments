@@ -1,4 +1,6 @@
 # Spaceship Game
+![Spaceship Game](../media/spaceship.gif)
+
 
 ## Controls
 
@@ -13,11 +15,3 @@
 If the ship speed and rotation is too slow, update the `SHIP_SPEED` and `SHIP_ROTATION_SPEED` values as needed to make the game more enjoyable.
 
 Likewise, update the `FIREBALL_ROTATION_SPEED` value as needed to make the game harder/easier.
-
-## Platform and Compiler
-
-Visual Studio 2022 was used to compile and run the source code
-
-Platform (OS): Windows 10 Pro
-
-Compiler: C++17
