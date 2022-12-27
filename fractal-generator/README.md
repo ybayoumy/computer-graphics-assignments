@@ -1,16 +1,16 @@
 # Fractal Generator
 
 ## Dragon Curve
-![Dragon Curve](../media/dragon-curve.gif)
+<img src="../media/dragon-curve.gif" width="300"/>
 
 ## Sierpinski Triangle
-![Sierpinski Triangle](../media/sierpinski.gif)
+<img src="../media/sierpinski.gif" width="300"/>
 
 ## Uniform Base Triangle
-![Uniform Base Triangle](../media/uniform-base.gif)
+<img src="../media/uniform-base.gif" width="300"/>
 
 ## Koch Snowflake
-![Koch Snowflake](../media/koch-snowflake.gif)
+<img src="../media/koch-snowflake.gif" width="300"/>
 
 ## Controls
 

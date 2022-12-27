@@ -5,7 +5,7 @@ This programs allows the user to create custom Bezier and B-Spline curves and vi
 Pre-defined Tensor Product Surfaces can also be visualized in this program.
 
 ## 2D Curve Editor
-![2D Curve Editor](../media/curve-editing.gif)
+<img src="../media/curve-editing.gif" width="300"/>
 
 - Left Click an empty location to add a new point (Point gets added at the release location)
 - Hold Left click on a point to select it and move it around. Release left click to un-select that point
@@ -14,7 +14,7 @@ Pre-defined Tensor Product Surfaces can also be visualized in this program.
 - Press `B` to toggle between a Bezier and B-spline curve
 
 ## 3D Curve Viewer
-![3D Curve Viewer](../media/view-curve.gif)
+<img src="../media/view-curve.gif" width="300"/>
 
 - Look around by moving your mouse
 - Move forward/backwards using `W`/`S` respectively
@@ -23,7 +23,7 @@ Pre-defined Tensor Product Surfaces can also be visualized in this program.
 - Press `B` to toggle between a Bezier and B-spline curve
 
 ## 3D Curve Surface of Revolution
-![3D Curve Surface of Revolution](../media/surface-of-revolution.gif)
+<img src="../media/surface-of-revolution.gif" width="300"/>
 
 - Only the B-Spline curve is used for this scene
 - Look around by moving your mouse
@@ -33,7 +33,7 @@ Pre-defined Tensor Product Surfaces can also be visualized in this program.
 - Press `N` to toggle between a wireframe and solid surface
 
 ## Tensor Product Surfaces
-![Tensor Product Surfaces](../media/tensor-surfaces.gif)
+<img src="../media/tensor-surfaces.gif" width="300"/>
 
 - Look around by moving your mouse
 - Move forward/backwards using `W`/`S` respectively

@@ -3,13 +3,13 @@
 This is a solar system simulation of the orbits of the earth and moon. Some values were exaggerated for visibility purposes. The Phong Reflection Model was used to light up the celestial bodies in the scene.
 
 ## Sun View
-![Sun View](../media/sun.gif)
+<img src="../media/sun.gif" width="300"/>
 
 ## Earth View
-![Earth View](../media/earth.gif)
+<img src="../media/earth.gif" width="300"/>
 
 ## Moon View
-![Moon View](../media/moon.gif)
+<img src="../media/moon.gif" width="300"/>
 
 ## Controls
 

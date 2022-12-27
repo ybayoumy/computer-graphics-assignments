@@ -1,5 +1,5 @@
 # Spaceship Game
-![Spaceship Game](../media/spaceship.gif)
+<img src="../media/spaceship.gif" width="300"/>
 
 
 ## Controls
